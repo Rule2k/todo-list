@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import styles from "./InputForm.module.scss";
 
-const InputForm = ({ addItem }: { addItem: (item: string) => void }) => {
+const InputForm = ({ onSubmit }: { onSubmit: (item: string) => void }) => {
   const [currentInput, setCurrentInput] = useState<string>("");
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -8,7 +9,7 @@ const InputForm = ({ addItem }: { addItem: (item: string) => void }) => {
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    addItem(currentInput);
+    onSubmit(currentInput);
     setCurrentInput("");
   };
 
@@ -19,6 +20,7 @@ const InputForm = ({ addItem }: { addItem: (item: string) => void }) => {
         onChange={(event) => handleChangeInput(event)}
         value={currentInput}
         placeholder={"What to do..."}
+        className={styles.Input}
       />
     </form>
   );

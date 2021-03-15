@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import List from "src/components/List";
 import InputForm from "src/components/InputForm";
-
+import Button from "src/components/Button";
 export interface ListInterface {
   id: number;
   label: string;
@@ -29,10 +29,17 @@ const TodoList = () => {
     );
   };
 
+  const handleResetList = () => {
+    setList([]);
+  };
+
   return (
     <>
-      <InputForm addItem={handleAddItem} />
-      <List list={list} crossItem={handleCrossItem} />
+      <InputForm onSubmit={handleAddItem} />
+      <List list={list} onClick={handleCrossItem} />
+      {list.length > 0 && (
+        <Button label={"Reset list"} onClick={handleResetList} />
+      )}
     </>
   );
 };

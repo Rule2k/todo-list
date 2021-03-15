@@ -5,12 +5,12 @@ import styles from "./List.module.scss";
 
 interface Props {
   list: ReadonlyArray<ListInterface>;
-  crossItem: (id: number) => void;
+  onClick: (id: number) => void;
 }
 
-const TodoList = ({ list, crossItem }: Props) => {
+const List = ({ list, onClick }: Props) => {
   return (
-    <>
+    <div className={styles.List}>
       {list.map((item) => {
         const itemClasses = cx({
           [styles.ItemList]: true,
@@ -18,13 +18,17 @@ const TodoList = ({ list, crossItem }: Props) => {
         });
 
         return (
-          <div onClick={() => crossItem(item.id)} className={itemClasses}>
+          <div
+            onClick={() => onClick(item.id)}
+            className={itemClasses}
+            key={item.id}
+          >
             {item.label}
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
 
-export default TodoList;
+export default List;
